@@ -1,1 +1,144 @@
-Hej
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!---->
+
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .codeblock{
+            display: inline-block;
+        }
+        .header{
+            text-align: center;
+        }
+        #haris-logo{
+            display: inline-block;
+            text-align: center;
+            animation: rotation 5s infinite linear;
+
+            color: rgb(51, 51, 51);
+            font-weight: bolder;
+            font-size: larger;
+        }
+        #haris-logo img{
+            border-radius: 150px;
+        }
+        h2, a{
+            margin: 0;
+            padding: 0;
+            color: rgb(51, 51, 51);
+        }
+        a{
+            font-weight: bolder;
+        }
+        a:hover{
+            opacity: 0.5;
+        }
+        .code-blocks{
+            display: flex;
+            justify-content: space-around
+        }
+        .hljs-comment{
+            color: green;
+        }
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(359deg);
+            }
+        }
+    </style>
+    <title>Harisprov</title>
+</head>
+<body>
+    <div class="header">
+        <div id="haris-logo">
+            <img src="https://media.licdn.com/dms/image/C5603AQHkMOAcg96Irw/profile-displayphoto-shrink_800_800/0/1562915309204?e=2147483647&v=beta&t=zCt1JMAv7lOz3c7935hbTP7PzEKaTgWYOYtAEbOek3E" alt="Haris">
+            <div>Harizz</div>
+        </div>    
+    </div>
+    <br>
+    <div class="code-blocks">
+        <div class="codeblock">
+            <h2>Picamera exempel:</h2>
+            <pre><code class="language-python">from picamera import PiCamera
+from time import sleep # importera allt som behövs
+
+camera = PiCamera()   # skapa kamera
+camera.rotation = 180   # sätt rotation 
+camera.image_effect ="watercolor" #sätt image effects
+camera.brightness = 60 # sätt brightness
+camera.color_effects=(128,128)# sätt color effects
+camera.awb_mode = "sunlight" # sätter awb mode till sunlight
+camera.annotate_text = "Hello world!" # annoterar texten Hello World
+camera.annotate_background = picamera.Color('black') # ger annoteringen svart bakgrund
+camera.annotate_foreground = picamera.Color('yellow') # ger annoteringen gul förgrund
+camera.start_preview(fullscreen = false, window = (x,y,w,h))# starta förhandsgranskning i fönster
+for i in range(2): #två varv i loopen
+    sleep(3) # sova tre sekunder
+    camera.capture('/home/pi/Downloads/testcam5%s.jpg' % i) # lägg till bilden i Downloads mappen
+camera.stop_preview()# avsluta förhandsgranskning</code></pre>
+                <a href="https://www.raspberrypi.org/app/uploads/2013/07/RaspiCam-Documentation.pdf" target="_blank">Raspicam documentation</a>
+                <br>
+                <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/5" target="_blank">Picamera och python</a>
+                <br>
+                <a href="https://projects.raspberrypi.org/en/projects/the-all-seeing-pi/10">Overlays</a>
+                <br>
+                <a href="https://projects-static.raspberrypi.org/projects/the-all-seeing-pi/4c33585d6214721fa96728088ffc3d9ca5b73257/en/resources/overlay_functions.py">Ladda ner overlay_functions.py</a>
+                <br>
+                <a href="https://github.com/raspberrypilearning/the-all-seeing-pi/tree/master/en/resources">Overlaybilder</a>
+        </div>
+        <div class="codeblock">
+            <h2>Raspistill</h2>
+            <pre><code class="language-bash">raspistill # tar en bild med raspberry camera
+
+raspistill -o Desktop/image.jpg # -o anger output vilket är Desktop/image.jpg här
+
+raspistill -o Desktop/image-small.jpg -w 640 -h 480 # -w och -h anger dimensioner i pixlar
+
+raspivid -o Desktop/video.h264 # spelar in video
+
+raspistill -vf # -vf flippar bilden vertikalt
+
+raspistill -hf # -hf flippar bilden horisontellt
+
+raspistill -t 2000 # -t anger fördröjning i ms
+
+raspistill -p # -p visar förhandsgranskning (preview)
+                #<'x,y,w,h'> för position och dimensioner
+
+raspistill -f # -f visar förhandsgranskning på hela skärmen
+
+raspistill -ex  # -ex anger exposure mode, kan vara:
+                #off,auto,night,nightpreview,backlight,spotlight,sports,
+                #snow,beach,verylong,fixedfps,antishake,fireworks
+
+raspistill -awb # -awb anger awb mode, kan vara:
+                #off,auto,sun,cloud,shade,tungsten,fluorescent,incandescent,
+                #flash,horizon
+
+raspistill -ifx # -ifx anger image effect, kan vara:
+                #none,negative,solarise,sketch,denoise,emboss,oilpaint,hatch,
+                #gpen,pastel,watercolour,film,blur,saturation,colourswap,washedout,
+                #posterise,colourpoint,colourbalance,cartoon
+
+raspistill -rot # -rot anger rotation (0-359)
+
+raspistill -br # -br anger ljusstyrka (0-100, där 50 är standard)</code></pre>
+        </div>
+    </div>
+
+</body>
+</html>
