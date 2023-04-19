@@ -46,7 +46,7 @@
         }
         .code-blocks{
             display: flex;
-            justify-content: space-around
+            justify-content: space-around;
         }
         .hljs-comment{
             color: green;
@@ -58,6 +58,13 @@
             to {
                 transform: rotate(359deg);
             }
+        }
+        @media screen and (max-width: 1400px) {
+            .code-blocks{  
+            flex-direction: column;
+            flex-flow: column-reverse;
+            margin: 10px;
+        }
         }
     </style>
     <title>Harisprov</title>
@@ -98,10 +105,10 @@ camera.stop_preview()# avsluta förhandsgranskning</code></pre>
                 <br>
                 <a href="https://projects-static.raspberrypi.org/projects/the-all-seeing-pi/4c33585d6214721fa96728088ffc3d9ca5b73257/en/resources/overlay_functions.py">Ladda ner overlay_functions.py</a>
                 <br>
-                <a href="https://github.com/raspberrypilearning/the-all-seeing-pi/tree/master/en/resources">Overlaybilder</a>
+                <a href="https://github.com/raspberrypilearning/the-all-seeing-pi/tree/master/en/resources" target="_blank">Overlaybilder</a>
         </div>
         <div class="codeblock">
-            <h2>Raspistill</h2>
+            <h2>Raspistill:</h2>
             <pre><code class="language-bash">raspistill # tar en bild med raspberry camera
 
 raspistill -o Desktop/image.jpg # -o anger output vilket är Desktop/image.jpg här
