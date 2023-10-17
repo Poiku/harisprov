@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!---->
+
     <style>
         body{
-            margin: 0;
-            display: flex;
-            height: 100vh;
-            flex-direction: column;
-            align-items: flex-start;
-            align-items: center;
-            justify-content: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .codeblock{
+            display: inline-block;
+        }
+        .header{
+            text-align: center;
         }
         #haris-logo{
+            display: inline-block;
             text-align: center;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
             animation: rotation 5s infinite linear;
 
             color: rgb(51, 51, 51);
@@ -26,6 +33,34 @@
         #haris-logo img{
             border-radius: 150px;
         }
+        h2, a{
+            margin: 0;
+            padding: 0;
+            color: rgb(51, 51, 51);
+        }
+        a{
+            font-weight: bolder;
+        }
+        a:hover{
+            opacity: 0.5;
+        }
+        .code-blocks{
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+        }
+        .upper-blocks, .lower-blocks{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 50px;
+        }
+        .upper-blocks{
+            flex-direction: row-reverse;
+        }
+        .hljs-comment{
+            color: green;
+        }
         @keyframes rotation {
             from {
                 transform: rotate(0deg);
@@ -34,15 +69,155 @@
                 transform: rotate(359deg);
             }
         }
+        @media screen and (min-width: 1000px) and (max-width: 1500px) {
+            .code-blocks{  
+            flex-direction: column;
+            margin: 10px;
+        }
+        .upper-blocks, .lower-blocks{
+            flex-direction: column-reverse;
+        }
+        /*.code-blocks > .codeblock:nth-of-type(2){
+            margin-bottom: 50px;
+        }*/
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            align-items: center;
+        }
+    }
+        @media screen and (max-width: 1000px){
+            .code-blocks{  
+            flex-direction: column;
+            margin: 10px;
+        }
+        .upper-blocks, .lower-blocks{
+            flex-direction: column-reverse;
+        }
+        /*.code-blocks > .codeblock:nth-of-type(2){
+            margin-bottom: 15px;
+        }*/
+    }
     </style>
-    <title>Harizz</title>
+    <title>Harisprov</title>
 </head>
 <body>
-    <div class="header">
+    <div class="header" style="display: none;">
         <div id="haris-logo">
             <img src="./media/logo.jpg" alt="Haris">
             <div>Harizz</div>
         </div>    
     </div>
+    <br>
+    <div class="code-blocks">
+        <div class="upper-blocks">
+            <div class="codeblock">
+                <h2>Provsvar 2:</h2>
+                <pre><code class="language-python">import time
+from picamera import PiCamera
+
+camera = PiCamera()
+
+# Justera kamerans egenskaper
+camera.brightness = 20
+camera.rotation = 45
+camera.image_effect = 'watercolor'
+camera.color_effects = (60, 60)
+camera.exposure_mode = 'beach'
+
+# Starta förhandsgranskning
+camera.start_preview(fullscreen=False, window=(100, 100, 400, 300))
+time.sleep(2)  # Ge kameran lite tid att justera inställningarna
+
+# Ta två bilder med 5 sekunders mellanrum
+for i in range(2):
+    img_path = f"/home/pi/Downloads/image_{i}.jpg"
+    camera.capture(img_path)
+    print(f"Bild {i + 1} tagen och sparad som {img_path}")
+    if i == 0:
+        time.sleep(5)
+
+# Stoppa förhandsgranskningen
+camera.stop_preview()</code></pre>
+            </div>
+            <div class="codeblock">
+                <h2>Provsvar 1:</h2>
+                <pre><code class="language-bash">raspistill -o /home/pi/Desktop/test50.jpg -t 5000 -p 50,100,400,200 -ex snow -awb horizon -br 60</code></pre>
+            </div>
+    
+        </div>
+        <div class="lower-blocks">
+            <div class="codeblock">
+                <h2>Picamera exempel:</h2>
+                <pre><code class="language-python">from picamera import PiCamera
+from time import sleep # importera allt som behövs
+
+camera = PiCamera()   # skapa kamera
+camera.rotation = 180   # sätt rotation 
+camera.image_effect ="watercolor" #sätt image effects
+camera.brightness = 60 # sätt brightness
+camera.color_effects=(128,128)# sätt color effects
+camera.awb_mode = "sunlight" # sätter awb mode till sunlight
+camera.annotate_text = "Hello world!" # annoterar texten Hello World
+camera.annotate_background = picamera.Color('black') # ger annoteringen svart bakgrund
+camera.annotate_foreground = picamera.Color('yellow') # ger annoteringen gul förgrund
+camera.start_preview(fullscreen = false, window = (x,y,w,h))# starta förhandsgranskning i fönster
+for i in range(2): #två varv i loopen
+    sleep(3) # sova tre sekunder
+    camera.capture('/home/pi/Downloads/testcam5%s.jpg' % i) # lägg till bilden i Downloads mappen
+camera.stop_preview()# avsluta förhandsgranskning</code></pre>
+                    <a href="https://www.raspberrypi.org/app/uploads/2013/07/RaspiCam-Documentation.pdf" target="_blank">Raspicam documentation</a>
+                    <br>
+                    <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/5" target="_blank">Picamera och python</a>
+                    <br>
+                    <a href="https://projects.raspberrypi.org/en/projects/the-all-seeing-pi/10" target="_blank">Overlays</a>
+                    <br>
+                    <a href="https://projects-static.raspberrypi.org/projects/the-all-seeing-pi/4c33585d6214721fa96728088ffc3d9ca5b73257/en/resources/overlay_functions.py">Ladda ner overlay_functions.py</a>
+                    <br>
+                    <a href="https://github.com/raspberrypilearning/the-all-seeing-pi/tree/master/en/resources" target="_blank">Overlaybilder</a>
+            </div>
+            <div class="codeblock">
+                <h2>Raspistill:</h2>
+                <pre><code class="language-bash">raspistill # tar en bild med raspberry camera
+
+raspistill -o Desktop/image.jpg # -o anger output vilket är Desktop/image.jpg här
+
+raspistill -o Desktop/image-small.jpg -w 640 -h 480 # -w och -h anger dimensioner i pixlar
+
+raspivid -o Desktop/video.h264 # spelar in video
+
+raspistill -vf # -vf flippar bilden vertikalt
+
+raspistill -hf # -hf flippar bilden horisontellt
+
+raspistill -t 2000 # -t anger fördröjning i ms
+
+raspistill -p # -p visar förhandsgranskning (preview)
+                #<'x,y,w,h'> för position och dimensioner
+
+raspistill -f # -f visar förhandsgranskning på hela skärmen
+
+raspistill -ex  # -ex anger exposure mode, kan vara:
+                #off,auto,night,nightpreview,backlight,spotlight,sports,
+                #snow,beach,verylong,fixedfps,antishake,fireworks
+
+raspistill -awb # -awb anger awb mode, kan vara:
+                #off,auto,sun,cloud,shade,tungsten,fluorescent,incandescent,
+                #flash,horizon
+
+raspistill -ifx # -ifx anger image effect, kan vara:
+                #none,negative,solarise,sketch,denoise,emboss,oilpaint,hatch,
+                #gpen,pastel,watercolour,film,blur,saturation,colourswap,washedout,
+                #posterise,colourpoint,colourbalance,cartoon
+
+raspistill -rot # -rot anger rotation (0-359)
+
+raspistill -br # -br anger ljusstyrka (0-100, där 50 är standard)</code></pre>
+            </div>
+    
+        </div>
+    </div>
+
 </body>
 </html>
